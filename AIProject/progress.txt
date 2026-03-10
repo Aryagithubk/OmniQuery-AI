@@ -1,1 +1,13 @@
 so till now, i have implemented whole project in such a way that system will answer first by checking in txt,then web and also slight spelling mistake. but i have to work on more spelling mistakes.i have to add more company related files.
+
+key features
+security measures
+limitations and challlenges
+
+
+
+
+
+
+
+

@@ -1,0 +1,75 @@
+# ----------------------
+# Python
+# ----------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# ----------------------
+# Environment variables (IMPORTANT)
+# ----------------------
+.env
+.env.*
+config.yaml
+
+# ----------------------
+# Logs & temp files
+# ----------------------
+*.log
+*.tmp
+*.swp
+
+# ----------------------
+# OS files
+# ----------------------
+.DS_Store
+Thumbs.db
+
+# ----------------------
+# VS Code / IDE
+# ----------------------
+.vscode/
+.idea/
+
+# ----------------------
+# Data files (VERY IMPORTANT for your case)
+# ----------------------
+data/
+*.pdf
+*.csv
+*.xlsx
+
+# ----------------------
+# Vector DB / embeddings
+# ----------------------
+vector_store/
+*.faiss
+*.pkl
+*.bin
+
+# ----------------------
+# Build / cache
+# ----------------------
+.cache/
+dist/
+build/
+
+# ----------------------
+# Node (if web folder uses it)
+# ----------------------
+node_modules/
+package-lock.json
+yarn.lock
+
+# ----------------------
+# Testing
+# ----------------------
+.pytest_cache/
+coverage/

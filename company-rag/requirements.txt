@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+chromadb
+langchain
+langchain-community
+langchain-text-splitters
+langchain-ollama
+pypdf
+python-multipart
+pyyaml
+requests
+langchain-chroma
+langgraph
+duckduckgo-search

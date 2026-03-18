@@ -1,0 +1,268 @@
+{
+  "info": {
+    "_postman_id": "c76a5b6f-1234-5678-abcd-1234567890ab",
+    "name": "OmniQuery Multi-Agent API",
+    "description": "Postman collection for the OmniQuery API. It includes the routing endpoint to send queries across multiple AI agents (DocAgent, DBAgent, Confluence, WebSearch).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check (Frontend Route)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            ""
+          ]
+        },
+        "description": "Returns the frontend HTML interface."
+      },
+      "response": [
+        {
+          "name": "Success (HTML response)",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                ""
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/html; charset=utf-8"
+            }
+          ],
+          "body": "<!DOCTYPE html><html>...</html>"
+        }
+      ]
+    },
+    {
+      "name": "List Agents Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/v1/agents",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "agents"
+          ]
+        },
+        "description": "Returns a list of all registered agents and their current readiness status."
+      },
+      "response": [
+        {
+          "name": "List Agents Example",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/agents",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "agents"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n    \"agents\": [\n        {\n            \"name\": \"DocAgent\",\n            \"status\": \"READY\",\n            \"is_healthy\": true\n        },\n        {\n            \"name\": \"DBAgent\",\n            \"status\": \"READY\",\n            \"is_healthy\": true\n        },\n        {\n            \"name\": \"WebSearchAgent\",\n            \"status\": \"READY\",\n            \"is_healthy\": true\n        }\n    ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "Query Orchestrator",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"How many employees are in the engineering department and what is their total salary?\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/query",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "query"
+          ]
+        },
+        "description": "Sends a natural language query into the LangGraph orchestrator. The orchestrator will classify the intent, route it to the appropriate agent(s), and synthesize a response."
+      },
+      "response": [
+        {
+          "name": "Successful DBAgent Query",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"How many employees are in the engineering department and what is their total salary?\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/query",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "query"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n    \"answer\": \"There are 45 employees in the engineering department, and their total salary is $4,500,000.\",\n    \"sources\": [\n        {\n            \"agent_name\": \"DBAgent\",\n            \"source_type\": \"database\",\n            \"source_identifier\": \"./data/demo.db\",\n            \"relevance_score\": 0.85,\n            \"excerpt\": \"SQL: SELECT COUNT(id), SUM(salary) FROM employees WHERE department='engineering'; → 1 row(s)\"\n        }\n    ],\n    \"agents_used\": [\n        \"DBAgent\"\n    ],\n    \"confidence\": 0.85,\n    \"execution_time_ms\": 1245.3\n}"
+        },
+        {
+          "name": "Successful DocAgent Query",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"What is the company leave policy for new fathers?\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/query",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "query"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n    \"answer\": \"According to the Employee Handbook, new fathers are eligible for 12 weeks of paid paternity leave...\",\n    \"sources\": [\n        {\n            \"agent_name\": \"DocAgent\",\n            \"source_type\": \"document\",\n            \"source_identifier\": \"employee_handbook_2024.pdf\",\n            \"relevance_score\": 0.91,\n            \"excerpt\": \"...Paternity leave: Fathers are eligible for 12 continuous or intermittent weeks...\"\n        }\n    ],\n    \"agents_used\": [\n        \"DocAgent\"\n    ],\n    \"confidence\": 0.91,\n    \"execution_time_ms\": 2304.1\n}"
+        }
+      ]
+    },
+    {
+      "name": "Legacy Query Endpoint",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"What were the Q3 profits?\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/query",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "query"
+          ]
+        },
+        "description": "Legacy fallback route that internally redirects to /api/v1/query"
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    }
+  ]
+}

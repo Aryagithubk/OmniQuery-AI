@@ -1,0 +1,28 @@
+﻿2026-04-13 02:18:44,121 - src.config.config_loader - INFO - Configuration loaded from config.yaml
+2026-04-13 02:18:44,121 - LLMProviderFactory - INFO - Creating LLM provider: ollama
+2026-04-13 02:18:44,121 - OllamaProvider - INFO - Initializing OllamaProvider with model: llama3.2:1b
+2026-04-13 02:18:45,665 - DBAgent - INFO - DBAgent initialized ù found 4 table(s) in PostgreSQL.
+2026-04-13 02:18:45,666 - DBAgent - INFO - Schema info:
+Table 'departments': columns = [id (integer, nullable=NO), name (character varying, nullable=NO), location (character varying, nullable=NO), budget (numeric, nullable=NO)]
+  Sample rows: [{'id': 1, 'name': 'Engineering', 'location': 'Building A, Floor 3', 'budget': Decimal('1500000.00')}, {'id': 2, 'name': 'Marketing', 'location': 'Building B, Floor 1', 'budget': Decimal('800000.00')}, {'id': 3, 'name': 'Sales', 'location': 'Building B, Floor 2', 'budget': Decimal('950000.00')}]
+Table 'employees': columns = [id (integer, nullable=NO), first_name (character varying, nullable=NO), last_name (character varying, nullable=NO), email (character varying, nullable=NO), department_id (integer, nullable=YES), job_title (character varying, nullable=NO), salary (numeric, nullable=NO), hire_date (date, nullable=NO), is_active (boolean, nullable=YES), password_hash (character varying, nullable=NO), role (character varying, nullable=NO)]
+  Sample rows: [{'id': 1, 'first_name': 'Arjun', 'last_name': 'Sharma', 'email': 'arjun.sharma@company.com', 'department_id': 1, 'job_title': 'Senior Software Engineer', 'salary': Decimal('125000.00'), 'hire_date': datetime.date(2021, 3, 15), 'is_active': True, 'password_hash': '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'role': 'superadmin'}, {'id': 2, 'first_name': 'Priya', 'last_name': 'Patel', 'email': 'priya.patel@company.com', 'department_id': 1, 'job_title': 'Software Engineer', 'salary': Decimal('95000.00'), 'hire_date': datetime.date(2022, 6, 1), 'is_active': True, 'password_hash': '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'role': 'admin'}, {'id': 3, 'first_name': 'Rahul', 'last_name': 'Kumar', 'email': 'rahul.kumar@company.com', 'department_id': 1, 'job_title': 'Tech Lead', 'salary': Decimal('145000.00'), 'hire_date': datetime.date(2019, 1, 10), 'is_active': True, 'password_hash': '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'role': 'user'}]
+Table 'projects': columns = [id (integer, nullable=NO), name (character varying, nullable=NO), department_id (integer, nullable=YES), lead_employee_id (integer, nullable=YES), budget (numeric, nullable=NO), status (character varying, nullable=NO), start_date (date, nullable=NO), end_date (date, nullable=YES)]
+  Sample rows: [{'id': 1, 'name': 'OmniQuery AI Platform', 'department_id': 1, 'lead_employee_id': 3, 'budget': Decimal('350000.00'), 'status': 'active', 'start_date': datetime.date(2024, 1, 15), 'end_date': None}, {'id': 2, 'name': 'Cloud Migration Phase 2', 'department_id': 8, 'lead_employee_id': 29, 'budget': Decimal('280000.00'), 'status': 'active', 'start_date': datetime.date(2024, 3, 1), 'end_date': None}, {'id': 3, 'name': 'Brand Refresh Campaign', 'department_id': 2, 'lead_employee_id': 8, 'budget': Decimal('120000.00'), 'status': 'completed', 'start_date': datetime.date(2023, 6, 1), 'end_date': datetime.date(2024, 2, 28)}]
+Table 'test_admin_table': columns = [id (integer, nullable=NO)]
+
+--- SCORES ---
+can_handle score: 0.8999999999999999
+
+--- EXECUTION ---
+2026-04-13 02:18:50,099 - DBAgent - INFO - raw LLM sql response: ```sql
+```sql
+UPDATE employees
+SET role = 'user'
+WHERE id = 1 AND email = 'arjun.sharma@company.com';
+```
+Success: False
+Error: Could not generate a valid SQL query.
+Raw Data: None
+Answer:
+ None

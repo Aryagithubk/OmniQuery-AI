@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniQuery - Authentication</title>
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #1e1e2f, #252542);
+        }
+        .auth-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            width: 450px;
+            max-width: 90%;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .auth-tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            color: #888;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        .auth-tab.active {
+            color: #fff;
+            border-bottom: 2px solid #6366f1;
+        }
+        .auth-input-group {
+            margin-bottom: 15px;
+        }
+        .auth-input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            color: #ccc;
+        }
+        .auth-input-group input, .auth-input-group select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            outline: none;
+            box-sizing: border-box;
+        }
+        .auth-btn {
+            width: 100%;
+            padding: 12px;
+            background: #6366f1;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        .auth-btn:hover {
+            background: #4f46e5;
+        }
+        .error-msg {
+            color: #ff6b6b;
+            font-size: 0.9em;
+            margin-top: 10px;
+            display: none;
+            text-align: center;
+        }
+        .register-fields {
+            display: none;
+        }
+        .register-mode .register-fields {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-card" id="auth-container">
+        <h2 style="text-align: center; margin-top:0;">OmniQuery Access</h2>
+        <div class="auth-tabs">
+            <div class="auth-tab active" id="tab-login">Login</div>
+            <div class="auth-tab" id="tab-register">Employee Register</div>
+        </div>
+        <form id="auth-form">
+            <div class="register-fields">
+                <div class="auth-input-group">
+                    <label>First Name</label>
+                    <input type="text" id="firstName">
+                </div>
+                <div class="auth-input-group">
+                    <label>Last Name</label>
+                    <input type="text" id="lastName">
+                </div>
+                <div class="auth-input-group">
+                    <label>Department</label>
+                    <select id="department">
+                        <option value="1">Engineering</option>
+                        <option value="2">Marketing</option>
+                        <option value="3">Sales</option>
+                        <option value="4">Human Resources</option>
+                        <option value="5">Finance</option>
+                        <option value="6">Product</option>
+                        <option value="7">Design</option>
+                        <option value="8">DevOps</option>
+                    </select>
+                </div>
+                <div class="auth-input-group">
+                    <label>Job Title</label>
+                    <input type="text" id="jobTitle">
+                </div>
+                <div class="auth-input-group">
+                    <label>Salary ($)</label>
+                    <input type="number" id="salary" value="60000">
+                </div>
+                <div class="auth-input-group">
+                    <label>Hire Date</label>
+                    <input type="date" id="hireDate">
+                </div>
+            </div>
+
+            <div class="auth-input-group">
+                <label>Email Address</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="auth-input-group">
+                <label>Password</label>
+                <input type="password" id="password" required>
+            </div>
+            
+            <button type="submit" class="auth-btn" id="auth-submit">Login</button>
+            <div class="error-msg" id="auth-error"></div>
+        </form>
+    </div>
+
+    <script src="/static/js/auth.js"></script>
+</body>
+</html>
